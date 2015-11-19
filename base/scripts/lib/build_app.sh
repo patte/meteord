@@ -8,7 +8,10 @@ BUNDLE_DIR=/tmp/bundle-dir
 cp -R /app $COPIED_APP_PATH
 cd $COPIED_APP_PATH
 
-meteor build --directory $BUNDLE_DIR --server=http://localhost:3000
+# Honour BUILD_SERVER env var
+BUILD_SERVER=${BUILD_SERVER:-"http://localhost:3000"}
+
+meteor build --directory $BUNDLE_DIR --server=$BUILD_SERVER
 
 cd $BUNDLE_DIR/bundle/programs/server/
 npm i
